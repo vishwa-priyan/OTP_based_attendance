@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const response = await fetch(
-        "https://otp-based-attendance.onrender.com/admin/verify-otp" ||
-          "http://localhost:3000/verify-otp",
+        "https://otp-based-attendance.onrender.com/admin/verify-otp" /*||
+          "http://localhost:3000/verify-otp"*/,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
