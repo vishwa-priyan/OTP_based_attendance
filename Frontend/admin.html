@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Live Attendance OTP</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #222;
+            color: white;
+            margin: 0;
+        }
+
+        .card {
+            text-align: center;
+            background: #333;
+            padding: 50px;
+            border-radius: 15px;
+            border: 2px solid #007bff;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 10px 0;
+            color: #007bff;
+            letter-spacing: 5px;
+        }
+
+        .timer-bar {
+            height: 5px;
+            background: #444;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .progress {
+            height: 100%;
+            background: #007bff;
+            width: 100%;
+            transition: width 10s linear;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Current Attendance Code</h2>
+        <h1 id="otpDisplay">------</h1>
+        <div class="timer-bar">
+            <div class="progress" id="progressBar"></div>
+        </div>
+        <p>OTP changes every 10 seconds</p>
+    </div>
+
+    <script>
+        async function fetchOTP() {
+            const res = await fetch('http://localhost:3000/admin/current-otp');
+            const data = await res.json();
+            document.getElementById('otpDisplay').textContent = data.otp;
+
+            // Reset animation
+            const bar = document.getElementById('progressBar');
+            bar.style.transition = 'none';
+            bar.style.width = '100%';
+            setTimeout(() => {
+                bar.style.transition = 'width 10s linear';
+                bar.style.width = '0%';
+            }, 50);
+        }
+
+        setInterval(fetchOTP, 10000);
+        fetchOTP();
+    </script>
+    <script>
+        // Simple client-side check
+        if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+        function logout() {
+            sessionStorage.removeItem('adminLoggedIn');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance Form with OTP</title>
+    <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h2>Student Attendance</h2>
+        <form id="attendanceForm">
+            <input type="text" id="name" name="name" placeholder="Full Name" required />
+            <input type="number" id="regNo" name="regNo" placeholder="Registration Number" required />
+            <input type="text" id="dept" name="dept" placeholder="Department" required />
+            <input type="email" id="email" name="email" placeholder="Email Address" required />
+            <input type="tel" id="phone" name="phone" placeholder="Phone Number" required />
+            <div class="otp-section">
+                <input type="text" id="otpInput" name="otpInput" placeholder="Enter OTP" maxlength="6" />
+                <button type="button" id="verifyBtn">Verify OTP</button>
+            </div>
+            <p id="message"></p>
+
+            <button type="submit" id="submitBtn" disabled>Submit Attendance</button>
+        </form>
+    </div>
+    <script src="./index.js"></script>
+</body>
+
+</html>
