@@ -39,21 +39,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const regNo = document.getElementById("regNo").value;
 
     try {
-      const response = await fetch("http://localhost:3000/verify-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          studentOtp: userOtp,
-          name: name,
-          regNo: regNo,
-        }),
-      });
+      const response = await fetch(
+        "https://otp-based-attendance.onrender.com/verify-otp" ||
+          "http://localhost:3000/verify-otp",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            studentOtp: userOtp,
+            name: name,
+            regNo: regNo,
+          }),
+        }
+      );
 
       const result = await response.json();
 
       if (result.success) {
         message.textContent = "✓ " + result.message;
         message.className = "success";
+        verifyBtn.disabled = true;
+        otpInput.disabled = true;
         submitBtn.disabled = false;
       } else {
         message.textContent = "X " + result.message;
@@ -77,6 +83,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Saving to Database:", formData);
     //alert("Attendance Marked Successfully!");
-
   });
 });

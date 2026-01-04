@@ -6,8 +6,8 @@ app.use(cors());
 app.use(express.json());
 
 // Add these credentials at the top of server.js
-const ADMIN_USER = "admin";
-const ADMIN_PASS = "123";
+const ADMIN_USER = process.env.ADMIN_USER || "admin";
+const ADMIN_PASS = process.env.ADMIN_PASS || "123";
 
 // Add this route
 app.post("/admin/login", (req, res) => {
@@ -21,7 +21,7 @@ app.post("/admin/login", (req, res) => {
 
 let currentOTP = "";
 let previousOTP = ""; // Grace period OTP
-let secretKey = "715524"; // For future use
+let secretKey = process.env.SECRET_KEY || "000000"; // For future use
 //let attendanceDatabase = []; // Temporary local storage
 
 const generateOTP = () => {

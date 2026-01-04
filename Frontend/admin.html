@@ -59,7 +59,7 @@
 
     <script>
         async function fetchOTP() {
-            const res = await fetch('http://localhost:3000/admin/current-otp');
+            const res = await fetch('http://localhost:3000/admin/current-otp' || 'https://otp-based-attendance.onrender.com/admin/current-otp');
             const data = await res.json();
             document.getElementById('otpDisplay').textContent = data.otp;
 
